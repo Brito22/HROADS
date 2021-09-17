@@ -59,3 +59,9 @@ D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.w
 D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\obj\Debug\net5.0\ref\senai.hroads.webApi.dll
 D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.pdb
 D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.genruntimeconfig.cache
+D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.MvcApplicationPartsAssemblyInfo.cs
+D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\SENAI-HROADS\SENAI-HROADS\senai.hroads.webApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll

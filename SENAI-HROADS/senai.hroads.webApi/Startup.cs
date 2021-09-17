@@ -3,10 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace senai.hroads.webApi
@@ -23,7 +27,61 @@ namespace senai.hroads.webApi
                 {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                    options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
                 });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Filmes.webApi"
+
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //c.IncludeXmlComments(xmlPath);
+
+            });
+
+            services
+                // Define a forma de autenticação
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = "JwtBearer";
+                    options.DefaultChallengeScheme = "JwtBearer";
+                })
+
+            // Define os parâmetros de validação do token
+                .AddJwtBearer("JwtBearer", options =>
+                {
+                     options.TokenValidationParameters = new TokenValidationParameters
+                     {
+                         // Valida quem está emitindo o token
+                         ValidateIssuer = true,
+
+                         // Valida quem está recebendo o token
+                         ValidateAudience = true,
+
+                         // Valida o tempo de expiração do token
+                         ValidateLifetime = true,
+
+                         // Definindo a chave (frase) de segurança
+                         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("HROADS-CHAVE-AUTENFICACAO")),
+
+                         // Tempo de expiração do token
+                         ClockSkew = TimeSpan.FromMinutes(30),
+
+                         // Define o nome do issuer, ou seja, quem emite o token
+                         ValidIssuer = "HROADS.webAPI",
+
+                         // Define o nome do audience, ou seja, quem recebe o token
+                         ValidAudience = "HROADS.webAPI"
+                     };
+                 });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +93,18 @@ namespace senai.hroads.webApi
             }
 
             app.UseRouting();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Filmes.webApi");
+                c.RoutePrefix = string.Empty;
+            });
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

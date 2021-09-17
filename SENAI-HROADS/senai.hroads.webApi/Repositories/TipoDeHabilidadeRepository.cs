@@ -14,7 +14,7 @@ namespace senai.hroads.webApi.Repositories
 
         public void Atualizar(int idTipoDeHabilidade, TipoDeHabilidade TipoDeHabilidadeAtualizado)
         {
-            TipoDeHabilidade TipoDeHabilidadeBuscado = ctx.TipoDeHabilidades.Find(idTipoDeHabilidade);
+            TipoDeHabilidade TipoDeHabilidadeBuscado = ctx.TipoDeHabilidades.Find(Convert.ToInt16(idTipoDeHabilidade));
 
             if (TipoDeHabilidadeAtualizado.NomeTipoHabilidade != null)
             {

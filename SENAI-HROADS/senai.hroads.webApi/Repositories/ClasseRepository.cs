@@ -15,7 +15,7 @@ namespace senai.hroads.webApi.Repositories
 
         public void Atualizar(int idClasse, Classe ClasseAtualizada)
         {
-            Classe ClasseBuscado = ctx.Classes.Find(idClasse);
+            Classe ClasseBuscado = ctx.Classes.Find(Convert.ToInt16(idClasse));
 
             if (ClasseAtualizada.NomeClasse != null)
             {
@@ -52,7 +52,7 @@ namespace senai.hroads.webApi.Repositories
 
         public List<Classe> ListarComHabilidades()
         {
-            return ctx.Classes.Include(e => e.Personagems).ToList();
+            return ctx.Classes.Include(e => e.IdHabilidadeNavigation).ToList();
         }
     }
 }

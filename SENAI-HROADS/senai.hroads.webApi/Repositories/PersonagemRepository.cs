@@ -15,7 +15,7 @@ namespace senai.hroads.webApi.Repositories
 
         public void Atualizar(int idPersonagem, Personagem PersonagemAtualizado)
         {
-            Personagem PersonagemBuscado = ctx.Personagems.Find(idPersonagem);
+            Personagem PersonagemBuscado = ctx.Personagems.Find(Convert.ToInt16(idPersonagem));
 
             if (PersonagemAtualizado.NomePersonagem != null)
             {
